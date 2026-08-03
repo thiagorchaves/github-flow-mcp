@@ -72,13 +72,19 @@ class GitHubConfig:
             initials=env("GITHUB_INITIALS", required=False, default="tc"),
             default_base_branch=env("GITHUB_DEFAULT_BASE_BRANCH", required=False, default="main"),
             local_repos_root=Path(
-                env("GITHUB_LOCAL_REPOS_ROOT", required=False, default=str(Path.home() / "Projects"))
-            ).expanduser().resolve(),
+                env(
+                    "GITHUB_LOCAL_REPOS_ROOT", required=False, default=str(Path.home() / "Projects")
+                )
+            )
+            .expanduser()
+            .resolve(),
             write_enabled=env_bool("GITHUB_WRITE_ENABLED", False),
             confirmation_ttl_seconds=env_int("GITHUB_CONFIRMATION_TTL_SECONDS", 300, minimum=30),
             basecamp_required=env_bool("GITHUB_BASECAMP_REQUIRED", False),
             prod_marker=env("GITHUB_PROD_MARKER", required=False, default="production"),
             review_by_ai_repos=env_csv("GITHUB_REVIEW_BY_AI_REPOS"),
-            review_by_ai_label=env("GITHUB_REVIEW_BY_AI_LABEL", required=False, default="ReviewByAI"),
+            review_by_ai_label=env(
+                "GITHUB_REVIEW_BY_AI_LABEL", required=False, default="ReviewByAI"
+            ),
             bot_reviewer=env("GITHUB_BOT_REVIEWER", required=False, default=""),
         )

@@ -25,4 +25,10 @@ def healthcheck() -> dict[str, Any]:
 
 def get_authenticated_user() -> dict[str, Any]:
     user = client().request("GET", "user")
-    return {"login": user.get("login"), "id": user.get("id"), "name": user.get("name"), "html_url": user.get("html_url"), "type": user.get("type")}
+    return {
+        "login": user.get("login"),
+        "id": user.get("id"),
+        "name": user.get("name"),
+        "html_url": user.get("html_url"),
+        "type": user.get("type"),
+    }

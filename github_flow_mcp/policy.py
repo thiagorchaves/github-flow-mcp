@@ -26,7 +26,9 @@ def slugify(value: str) -> str:
 def validate_basecamp_url(url: str, cfg: GitHubConfig) -> str:
     candidate = (url or "").strip()
     if cfg.basecamp_required and not candidate:
-        raise GitHubFlowError("Basecamp link is required by policy before creating a branch or pull request.")
+        raise GitHubFlowError(
+            "Basecamp link is required by policy before creating a branch or pull request."
+        )
     if candidate:
         parsed = urlparse(candidate)
         if parsed.scheme not in {"http", "https"} or "basecamp" not in parsed.netloc.lower():
@@ -59,7 +61,9 @@ def build_branch_plan(
     if not prefix:
         raise GitHubFlowError("GITHUB_INITIALS must contain letters or numbers.")
 
-    branch_name = f"{prefix}-{prod_marker}-{change_slug}" if production else f"{prefix}-{change_slug}"
+    branch_name = (
+        f"{prefix}-{prod_marker}-{change_slug}" if production else f"{prefix}-{change_slug}"
+    )
     return BranchPlan(
         branch_name=branch_name,
         source_branch=source_branch,

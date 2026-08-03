@@ -39,9 +39,7 @@ def list_branches(repo: str, owner: str = "", max_items: int = 100) -> list[dict
 def get_collaborator_permission(repo: str, username: str, owner: str = "") -> dict[str, Any]:
     """Checks whether a user/bot is a collaborator and returns repository permission."""
     owner = owner or config().default_owner
-    data = client().request(
-        "GET", f"repos/{owner}/{repo}/collaborators/{username}/permission"
-    )
+    data = client().request("GET", f"repos/{owner}/{repo}/collaborators/{username}/permission")
     return {
         "user": (data.get("user") or {}).get("login", username),
         "permission": data.get("permission"),

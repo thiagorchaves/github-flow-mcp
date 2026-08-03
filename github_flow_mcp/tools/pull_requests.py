@@ -16,9 +16,7 @@ from ..policy import (
 def _owner_or_default(owner: str) -> str:
     resolved = owner or config().default_owner
     if not resolved:
-        raise GitHubFlowError(
-            "owner is required when GITHUB_DEFAULT_OWNER is not configured."
-        )
+        raise GitHubFlowError("owner is required when GITHUB_DEFAULT_OWNER is not configured.")
     return resolved
 
 
@@ -181,9 +179,7 @@ def _pr_payload(preview: dict[str, Any]) -> dict[str, Any]:
         "body": preview["body"],
         "basecamp_url": preview["basecamp_url"],
         "labels": preview["labels"],
-        "reviewers": [
-            item["username"] for item in preview["reviewers"] if item.get("available")
-        ],
+        "reviewers": [item["username"] for item in preview["reviewers"] if item.get("available")],
     }
 
 

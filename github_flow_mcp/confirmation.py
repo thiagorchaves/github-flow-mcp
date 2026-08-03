@@ -26,7 +26,9 @@ _MAX_PENDING = 500
 
 
 def _fingerprint(payload: dict[str, Any]) -> str:
-    data = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str)
+    data = json.dumps(
+        payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str
+    )
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
 
 

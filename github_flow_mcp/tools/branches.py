@@ -11,9 +11,7 @@ from ..policy import build_branch_plan, require_write_enabled
 def _owner_or_default(owner: str) -> str:
     resolved = owner or config().default_owner
     if not resolved:
-        raise GitHubFlowError(
-            "owner is required when GITHUB_DEFAULT_OWNER is not configured."
-        )
+        raise GitHubFlowError("owner is required when GITHUB_DEFAULT_OWNER is not configured.")
     return resolved
 
 
