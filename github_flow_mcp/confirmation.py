@@ -61,7 +61,8 @@ def issue_confirmation(action: str, payload: dict[str, Any], cfg: GitHubConfig) 
 def consume_confirmation(action: str, payload: dict[str, Any], confirmation_id: str) -> None:
     if not confirmation_id:
         raise GitHubFlowError(
-            "confirmation_id is required. Generate a preview, show it to the user, and pass the token only after explicit approval."
+            "confirmation_id is required. Generate a preview, show it to the user, "
+            "and pass the token only after explicit approval."
         )
     now = time.time()
     with _LOCK:

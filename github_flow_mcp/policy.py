@@ -39,7 +39,8 @@ def validate_basecamp_url(url: str, cfg: GitHubConfig) -> str:
 def require_write_enabled(cfg: GitHubConfig) -> None:
     if not cfg.write_enabled:
         raise GitHubFlowError(
-            "GitHub writes are disabled. Set GITHUB_WRITE_ENABLED=true only for sessions that need remote mutations."
+            "GitHub writes are disabled. Set GITHUB_WRITE_ENABLED=true only for sessions "
+            "that need remote mutations."
         )
 
 

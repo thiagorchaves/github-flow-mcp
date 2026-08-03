@@ -2,21 +2,21 @@ from pathlib import Path
 
 import pytest
 
-from github_flow_mcp.confirmation import consume_confirmation, issue_confirmation
 from github_flow_mcp.config import GitHubConfig
+from github_flow_mcp.confirmation import consume_confirmation, issue_confirmation
 from github_flow_mcp.errors import GitHubFlowError
 
 
 def cfg() -> GitHubConfig:
     return GitHubConfig(
-        token="test",
+        token="unit-test-token",  # noqa: S106
         api_base="https://api.github.com",
         api_version="2022-11-28",
         user_agent="test",
         default_owner="example",
         initials="tc",
         default_base_branch="main",
-        local_repos_root=Path("/tmp"),
+        local_repos_root=Path.cwd(),
         write_enabled=True,
         confirmation_ttl_seconds=300,
         basecamp_required=False,

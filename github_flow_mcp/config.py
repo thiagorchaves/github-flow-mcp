@@ -62,7 +62,7 @@ class GitHubConfig:
     bot_reviewer: str
 
     @classmethod
-    def from_env(cls) -> "GitHubConfig":
+    def from_env(cls) -> GitHubConfig:
         return cls(
             token=env("GITHUB_TOKEN"),
             api_base=env("GITHUB_API_BASE", required=False, default="https://api.github.com"),

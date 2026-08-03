@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -22,12 +23,15 @@ def resolve_repo_path(repo_path: str, cfg: GitHubConfig) -> Path:
 
 
 def git(path: Path, *args: str) -> str:
-    result = subprocess.run(
-        ["git", "-C", str(path), *args],
+    git_binary = shutil.which("git")
+    if not git_binary:
+        raise GitHubFlowError("git executable was not found in PATH.")
+
+    result = subprocess.run(  # noqa: S603
+        [git_binary, "-C", str(path), *args],
         check=False,
         text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
         timeout=30,
     )
     if result.returncode != 0:

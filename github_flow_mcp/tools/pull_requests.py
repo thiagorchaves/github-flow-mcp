@@ -7,8 +7,8 @@ from ..confirmation import consume_confirmation, issue_confirmation
 from ..errors import GitHubFlowError
 from ..policy import (
     ensure_basecamp_in_body,
-    required_labels,
     require_write_enabled,
+    required_labels,
     validate_basecamp_url,
 )
 
