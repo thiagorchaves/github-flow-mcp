@@ -1,0 +1,24 @@
+name: Dependency audit
+
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "31 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  UV_DEFAULT_INDEX: https://pypi.org/simple
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@f98e06938123ccabd21905ea5d0069192241f9f1 # v8.3.1
+      - run: uv lock
+      - run: uv export --locked --no-dev --no-emit-project --no-hashes --format requirements-txt --output-file requirements-audit.txt
+      - run: uvx pip-audit -r requirements-audit.txt
